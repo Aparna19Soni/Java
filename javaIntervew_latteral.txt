@@ -1,0 +1,56 @@
+1.Why String has been made immutable? What will go wrong if it is not immutable?
+
+Answer: String works on the concept of pool, which means if three string has same value, there will be just one object created in pool and all three object reference wil be pointing on that. What Immutablity means is once a object is created it can not be modified. So now if String would have been not mutable then think if I am modifying value of 1 reference the object pointed by this refrence wil be modified and as a result all othere reference which was pointing on this object will get modified. But our inyention was to modify just one reference.
+
+Why we use pool:
+It saves lots of memory. Also it is performance benfitional, if an object already exist String will just point on it rather than creating new one.
+
+Can you make a class Immutable and how?
+yes we can make our own immutable class. We will make all the fields Final and will make class also Final(so that no one can extend it). Also we will not provide any setter method.
+
+
+
+2.When you should handle the exception and when you should throw it?
+
+Answer: you handle the exception when you want to perform some operation when something goes wrong. But when you are not sure what you should do when exception happens then you propogate it to caller and leave it to them what they want to do once exception occurs.
+
+3. If you have a situation where you have to concatenate the string object many times then how will you do it? and why so?
+Answer: StringBuffer or StringBuilder should be used for that. Because String concatenation will create new object every time so that will be performance impactive. Also before creation ob object String will search in pool for existance of same object that will also add performance impact.
+
+4. How does HashMap works in Java? What to you understand by hashcollison?
+5. Are you aware of ConcurrentHashMap and how does it work?
+6. If an application is throwing out of memeory exception, how do you handle it?
+
+
+7. What do you understand by dependency Injection and why it is important?
+
+Answer: We include the required object into the class. In spring we do it using @Autowire. The main advantage of using DI is testing because it tedious task to test a constructor call.
+Other advantage is your object is created before it's use in call, so at the time of method call you save the time and memory of object creation.
+
+8. What is default scope of Bean created by Spring? Can we change the scope of Bean explicitly?
+Answer: The default scope is Singelon. yes we can do it by using custom annotation like @Provide, @Request
+
+9. How Spring Controller works? Could you please explain what happens once you hit a URL in browser?
+
+Answer: Spring uses Handler for URL mapping. So once we create a controller with URL mapping at the time of server startup spring does component scan and when it find @Requestmapping it resgister the URL against the controller method.
+Once we hit the URL in browser the request goes to Dispatcher Servlet in Spring which delegates the call to handler and handler passed it to controller by looking at registery(done at the time of server startup).
+10.Ho hibernate works?
+
+Answer: Hibernate create session factory using the parameter for database, so you will have one session factory for each database. Also session factory will have information of entity for this database.
+We reuest sessionfactory to provide a session and we use session for performing the DB operation.
+
+11. What do you mean by transaction in Hibernate, and are you awared of types of transaction?
+
+12.
+
+11. What do you mean by Fetch join?
+
+
+12. What do you understand by Singleton and do you know any way where it can fail?
+
+Answer:
+13. What is the difference between strategy and template pattern?
+
+14. How Garbage collector works in java? What is different type of GC you know? What is stop the world concept in GC.
+13. What do you understand from Parallel GC and Concurrent GC
+15. Are you aware of happens before link in thread and how it works and when it is established. 

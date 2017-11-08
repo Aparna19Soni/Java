@@ -1,0 +1,659 @@
+1.why java is platform independent?
+-java class is coverted to source code and can be compiled at any env like unix,linux.
+
+2.write a simple factorial program;
+
+3.what will happen if you don't put break statement in switch?
+-if we don't put vreak it will print the next case even though it matches or not
+
+4.what is imporance of default in switch statement? 
+-if nothing matches it will print default
+
+5.which primitive type is allowed in switch?
+-int and char
+
+6.class name should have same name as source file name is it true statement?
+only public class should have same name as source file name.
+For example:
+class ClassN{
+	public static void main(String[] args) {
+		
+	}
+}
+if we save above with name as ClassName.java file and try to compile will get below error:
+class ClassN is public, should be declared in a file named ClassN.java
+
+7.If i have declared a variable inside a block and trying to print outside block what will happen?
+package javafundamental;
+
+public class VariableOutsideBlock {
+	public static void main(String[] args)
+	{
+		{
+		int a =10;
+		}
+		System.out.println("pring variable"+ a);
+	}
+
+}
+Ans:-A can't be resolved as variable.will give compile time error.
+
+8.If method type is void what will be in return statement?will return null; is same as return;
+Ans:-return;No
+9.how does accessor and mutator will help ?give me an example.
+
+10:what o/p below program will provide?
+
+package javafundamental;
+
+public class Flight {
+
+	private int passenger=10;
+	private int seat =40;
+	
+	public Flight(int pass , int seat)
+	{
+		this.passenger = pass;
+		this.seat = seat;
+	}
+	public boolean hasRoom(Flight f2)
+	{
+		int total = passenger + f2.passenger;
+		return total <= seat; 
+	}
+	public Flight createNewFlight(Flight f2)
+	{
+		Flight newFlight = new Flight();
+		newFlight.seat=seat;
+		newFlight.passenger = passenger + f2.passenger;
+		return newFlight;
+		
+	}
+	public static void main(String[] args) {
+		Flight f11 = new Flight();
+		Flight f12 = new Flight();
+		Flight f13;
+		if(f11.hasRoom(f12))
+		{
+			f13 = f11.createNewFlight(f12);
+			System.out.println(f13.passenger);
+		}
+	}
+}
+
+Ans:-programmer has to define the no parameter constructer as he has created constructor with argument.program will give compilation error
+
+11.Which block will execute first?tell the order of block.
+Example:
+package javafundamental;
+
+/**
+ * 
+ * @author Aparna:below code shows the order of belocks.
+ * 1.Field Initialization
+ * 2.Initialization block
+ * 3.constructer block
+ *
+ */
+public class InitializationConstructorBlock {
+	private int theField = 1;//field initialization
+	
+	public int getTheField() {
+		return theField;
+	}
+
+	public InitializationConstructorBlock()
+	{
+		//custructor block
+		theField = 3;
+	}
+	
+	{
+		//Initialization block
+		theField = 2;
+	}
+
+	public static void main(String[] args) {
+		InitializationConstructorBlock ib = new InitializationConstructorBlock();
+		System.out.println("Field is:" +ib.getTheField());
+	}
+
+}
+Ans:Field Initialization,Initialization Block,Custructor block
+
+12: If Java uses the pass-by reference, why won't a swap function work?
+
+Ans: Java does manipulate objects by reference, and all object variables are references. However, Java doesn't pass method arguments by reference; it passes them by value. 
+
+Example:
+public void tricky(Point arg1, Point arg2)
+{
+  arg1.x = 100;
+  arg1.y = 100;
+  Point temp = arg1;
+  arg1 = arg2;
+  arg2 = temp;
+}
+public static void main(String [] args)
+{
+  Point pnt1 = new Point(0,0);
+  Point pnt2 = new Point(0,0);
+  System.out.println("X: " + pnt1.x + " Y: " +pnt1.y); 
+  System.out.println("X: " + pnt2.x + " Y: " +pnt2.y);
+  System.out.println(" ");
+  tricky(pnt1,pnt2);
+  System.out.println("X: " + pnt1.x + " Y:" + pnt1.y); 
+  System.out.println("X: " + pnt2.x + " Y: " +pnt2.y);  
+}
+ If we execute this main() method, we see the following output:
+
+X: 0 Y: 0
+X: 0 Y: 0
+X: 100 Y: 100
+X: 0 Y: 0
+
+13.Inheritence:
+how does field and method works in inheritence?Give example.
+Field hides base class fields with same name but methods overrides base class method with same signature.
+example for field hiding:
+package javafundamental;
+
+public class Inheritence {
+	int seat = 150;
+	int passenger = 1;
+	public void addOnePassenger()
+	{
+		if(hasSeat())
+		
+			passenger+=1;
+			else
+				handleTooMany();
+		
+	}
+	private boolean hasSeat()
+	{
+		return passenger > seat;
+	}
+	private String handleTooMany()
+	{
+		return "Many Passengers";
+	}
+
+}
+
+package javafundamental;
+/**
+ * 
+ * @author Aparna
+ *Here seat field is present in both Inheritence and CargoFlight Class
+ *So field work with refrence type(left side of =) but method works with (right side of =)new object
+ *Field hides base class fields with same name but methods overrides base class method with same signature.
+ */
+public class CargoFlight extends Inheritence {
+	int seat = 12;
+
+	public static void main(String[] args) {
+		Inheritence in = new Inheritence();//150
+		System.out.println(in.seat);
+		
+		CargoFlight Cg = new CargoFlight();//12
+		System.out.println(Cg.seat);
+		
+		Inheritence Ic = new CargoFlight();//150 v.v.i
+		System.out.println(Ic.seat);
+	}
+
+}
+
+
+14.Every class inherits directly or indirectly from objectclass
+15.How does equal method works?what will be o/p of below code?and what code will be added so it will printboth objects are equal
+
+package javafundamental;
+
+public class equals {
+	private int flightNumber;
+	private int flightClass;
+	public static void main(String[] args) {
+		equals eq1 = new equals();
+		equals eq2 = new equals();
+		if(eq1 == eq2)
+		{
+			System.out.println("both objects are equal");
+		}
+		else if(eq1.equals(eq2))
+		{
+			System.out.println("both objects are equal");
+		}
+		else
+		{
+		System.out.println("Not equal");
+		
+		}
+		
+	}
+
+}
+ o/p:not equals, because code in both == and equals case will compare that both refrences pointing to same object or not.
+ So,here they are actually pointing to two diffrent object.To make them print equal we have to override equals method
+ Modified program:
+ package javafundamental;
+
+public class equals {
+	private int flightNumber;
+	private int flightClass;
+	public static void main(String[] args) {
+		equals eq1 = new equals();
+		equals eq2 = new equals();
+		if(eq1 == eq2)
+		{
+			System.out.println("both objects are equal");
+		}
+		else if(eq1.equals(eq2))
+		{
+			System.out.println("both objects are equal");
+		}
+		else
+		{
+		System.out.println("Not equal");
+		
+		}
+		
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		equals other = (equals) obj;
+		if (flightClass != other.flightClass)
+			return false;
+		if (flightNumber != other.flightNumber)
+			return false;
+		return true;
+	}
+
+}
+16.Is it possible for a abstract class to have no abstract method in it?is vice versa is true?
+yes,but with a abstract method class should be abstract.
+
+17.which keyword will help to know wether object is of the specified type (class or subclass or interface).
+Ans:instanceof operator
+example:
+class Simple1{  
+ public static void main(String args[]){  
+ Simple1 s=new Simple1();  
+ System.out.println(s instanceof Simple1);//true  
+ }  
+} 
+
+18.what do you mean by string objects are immutable?
+Once string object is created it can't be changed
+
+19.Give example of String equals method.what is diffrece between equals and ==.when do we we use intern() method?
+Equals method compare charecter by charecter but == method checks refrences pointing to same object or not.
+intern()  method is used to larger String comparision.When the intern method is invoked, if the pool already contains a
+string equal to this {@code String} object as determined by  the {@link #equals(Object)} method, then the string from the pool is
+returned.
+Example:
+
+package javafundamental;
+/**
+ * intern is used when larger string in compared to make cost less
+ * @author Aparna
+ *
+ */
+public class StringIntern {
+	public static void main(String[] args) {
+		String s1 = "I Love";
+		s1 += " Java";
+		String s2 = "I";
+		s2 += " Love Java";
+		if (s1 == s2) {
+			System.out.println("s1 and s2 are equal by ==");
+		}
+		if (s1.equals(s2)) {
+			System.out.println("s1 and s2 are equal by equal method");
+		}
+
+		String s3 = s1.intern();
+		String s4 = s2.intern();
+		if (s3 == s4) {
+
+			System.out.println("s3 and s4 are equal by intern");
+		}
+	}
+
+}
+
+20.How to convert integer to String?
+Ans:-ValueOf
+Example:
+int iVal =100;
+
+o/p:"100"
+
+21.String representation of class 
+
+Ans:toString
+
+22.when java already had Atring class why String builder still keep importance?provide example.
+diiference between String buffer and builder?
+Ans:
+String does not allow appending. Each method you invoke on a String creates a new object and returns it. This is because String is immutable - it cannot change its internal state.
+
+On the other hand StringBuilder is mutable. When you call append(..) it alters the internal char array, rather than creating a new string object.
+
+Thus it is more efficient to have:
+
+StringBuilder sb = new StringBuilder();
+for (int i = 0; i < 500; i ++) {
+    sb.append(i);
+}
+
+rather than str += i, which would create 500 new string objects.
+
+Note also that there is StringBuffer in addition to StringBuilder. The difference is that the former has synchronized methods. If you use it as a local variable, use StringBuilder. If it happens that it's possible for it to be accessed by multiple threads, use StringBuffer.
+
+23.Diffrence between final and static final variable/fields/methods?
+Ans:https://stackoverflow.com/questions/8005250/difference-between-a-static-and-a-final-static-variable-in-java
+
+24.what does enum classes means ?provide example
+class enum colors
+{yellow,red,green;
+}
+
+25.what is Runtime exception?Example of runtime exception
+NullPointerExceptions
+
+26.what is Unchecked Exception and checked exction?
+Runtime exceptions are unchecked exceptions,any class inherits from runtime exceptions are unchecked exception.
+Example:NullPointerExceptions.
+For checked exception compiler throws error.Any class inherits from exception but not runtime exception is checked exceptions.
+
+27:what will be order of catch block while catching exception ?
+-Each catch block start with most specific exception type to General
+
+28. multiple or multilevel inheritence in java, which is supported?
+https://www.journaldev.com/1775/multiple-inheritance-in-java
+Multilevel inheritence is supported in java.Example:A extends B and B extends C.But multiple is not because of diamond problem in java.
+
+To understand diamond problem easily, let’s assume that multiple inheritance was supported in java. In that case, we could have a class hierarchy like below image.
+
+diamond problem in java
+
+Let’s say SuperClass is an abstract class declaring some method and ClassA, ClassB are concrete classes.
+
+SuperClass.java
+
+package com.journaldev.inheritance;
+
+public abstract class SuperClass {
+
+	public abstract void doSomething();
+}
+
+ClassA.java
+
+package com.journaldev.inheritance;
+
+public class ClassA extends SuperClass{
+	
+	@Override
+	public void doSomething(){
+		System.out.println("doSomething implementation of A");
+	}
+	
+	//ClassA own method
+	public void methodA(){
+		
+	}
+}
+
+ClassB.java
+
+package com.journaldev.inheritance;
+
+public class ClassB extends SuperClass{
+
+	@Override
+	public void doSomething(){
+		System.out.println("doSomething implementation of B");
+	}
+	
+	//ClassB specific method
+	public void methodB(){
+		
+	}
+}
+
+Now let’s say ClassC implementation is something like below and it’s extending both ClassA and ClassB.
+
+ClassC.java
+
+package com.journaldev.inheritance;
+
+public class ClassC extends ClassA, ClassB{
+
+	public void test(){
+		//calling super class method
+		doSomething();
+	}
+
+}
+Notice that test() method is making a call to superclass doSomething() method. This leads to the ambiguity as compiler doesn’t know which superclass method to execute. Because of the diamond shaped class diagram, it’s referred as Diamond Problem in java. Diamond problem in java is the main reason java doesn’t support multiple inheritance in classes.
+
+Notice that the above problem with multiple class inheritance can also come with only three classes where all of them has at least one common method.
+
+29.Is Multiple Inheritance in Java Interfaces is possible?
+Yes.
+
+Example:
+InterfaceA.java
+----------------
+package com.journaldev.inheritance;
+
+public interface InterfaceA {
+
+	public void doSomething();
+}
+
+InterfaceB.java
+--------------------
+package com.journaldev.inheritance;
+
+public interface InterfaceB {
+
+	public void doSomething();
+}
+
+Notice that both the interfaces are declaring same method, now we can have an interface extending both these interfaces like below.
+
+InterfaceC.java
+
+package com.journaldev.inheritance;
+
+public interface InterfaceC extends InterfaceA, InterfaceB {
+
+	//same method is declared in InterfaceA and InterfaceB both
+	public void doSomething();
+	
+}
+
+This is perfectly fine because the interfaces are only declaring the methods and the actual implementation will be done by concrete classes implementing the interfaces. So there is no possibility of any kind of ambiguity in multiple inheritance in java interfaces.
+Thats why a java class can implement multiple inheritance, something like below example.
+InterfacesImpl.java
+
+package com.journaldev.inheritance;
+
+public class InterfacesImpl implements InterfaceA, InterfaceB, InterfaceC {
+
+	@Override
+	public void doSomething() {
+		System.out.println("doSomething implementation of concrete class");
+	}
+
+	public static void main(String[] args) {
+		InterfaceA objA = new InterfacesImpl();
+		InterfaceB objB = new InterfacesImpl();
+		InterfaceC objC = new InterfacesImpl();
+		
+		//all the method calls below are going to same concrete implementation
+		objA.doSomething();
+		objB.doSomething();
+		objC.doSomething();
+	}
+
+}
+30.What will happen if we define a concrete method in an interface?
+
+ Ans:   By default interface methods are abstract.
+    if we declare any concrete method in an interface compile time error will come.
+    Error:Abstract methods do not specify a body
+	
+31.Can we create non static variables in an interface?
+
+    No.We can not create non static variables in an interface.
+    If we try to create non static variables compile time error comes.
+    By default members will be treated as public static final variables so it expects some value to be initialized.
+
+Example:
+    package com.instanceofjava;
+    interface JavaInterface{
+     
+    int x, y; // compile time error
+
+
+    }
+
+32.Can we declare interface members as private or protected?
+
+  Ans:  No.
+
+33.Can we create object for an interface?
+
+    NO. We can not create object for interface.
+    We can create a variable from an interface
+	
+	Example:
+	
+
+    package com.instanceofjava;
+    interface JavaInterface{
+     
+    void show(); 
+
+    }
+
+
+    package com.instanceofjava;
+    interface A implements JavaInterface {
+     
+    void show(){
+    // code
+    }
+    public static void main(String args[]){
+     
+     JavaInterface obj= new JavaInterface(); // Error: Cannot instantiate the type JavaInterface
+     
+    }
+    }
+
+34.Can we declare interface as final?
+
+    No. Compile time error will come.
+	Example:
+	final interface Sample
+	{
+	int x =10;
+	void show();
+	}
+	
+35.Can we declare constructor  inside an interface?
+
+    No. Interfaces does not allow constructors.
+    The variables inside interfaces are static final variables means constants and we can not create object fro interface so there is no need of constructor in interface that is the reason interface doesn't allow us to create constructor.
+
+36.How can we access same variables defined in two interfaces implemented by a class?
+
+    By Using corresponding interface.variable_name we can access variables of corresponding interfaces.
+Example:
+
+public interface JavaInterface {
+ int x =100;
+}
+
+public interface JavaInterface1 {
+int x =200;
+}
+
+package javafundamental;
+
+public class InterfaceImpl implements JavaInterface,JavaInterface1 {
+	public static void main(String[] args) {
+		
+		JavaInterface1 we = new InterfaceImpl();
+		System.out.println("Value is:"+we.x);
+		System.out.println(JavaInterface.x);
+		System.out.println(JavaInterface1.x);
+		
+	}
+
+}
+
+37.If  Same method is defined in two interfaces can we override this method in class implementing these interfaces.
+
+    Yes implementing the method once is enough in class.
+    A class cannot implement two interfaces that have methods with same name but different return type.
+package javafundamental;
+
+public interface JavaInterface {
+ int x =100;
+ 
+ public void add();
+}
+
+package javafundamental;
+
+public interface JavaInterface1 {
+int x =200;
+public int add();
+}
+
+package javafundamental;
+
+public class InterfaceImpl implements JavaInterface,JavaInterface1 {
+	public static void main(String[] args) {
+		
+		JavaInterface1 we = new InterfaceImpl();
+		System.out.println("Value is:"+we.x);
+		System.out.println(JavaInterface.x);
+		System.out.println(JavaInterface1.x);
+		
+	}
+
+	public int add() {//here we are getting error as we had  method with same name and have diffrent return type.
+		{
+		return 0;
+	}
+
+	
+
+	
+}
+
+
+
+
+
+
+	
+
+  
+
+	
+	
+
