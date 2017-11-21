@@ -14,7 +14,7 @@ etc/config/queues/
 .metadata/
 .recommenders/
 nb-configuration.xml
-
+.sonarlint/
 
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
