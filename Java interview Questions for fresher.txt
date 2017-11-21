@@ -641,12 +641,96 @@ public class InterfaceImpl implements JavaInterface,JavaInterface1 {
 	}
 
 	
-
-	
 }
 
+38.How many types of stream?give example
+Binary,Text
 
+Reading one byte at a time use InputStream to read individual charecter use Reader class:
+For byte reader and writer:
+InputStream
+int read()
+int read(byte[] buff)
 
+op straem:
+void write(int b)
+void write(byte[] buff)
+
+For Text reader and writer:
+int read()
+int read(char[] buff)
+
+void write(int ch)
+void write(char[] buff)
+void write(String str)
+
+InputStream input =//Create input stream
+int intVal;
+while((intVal = input.read())>0)
+{
+byte byteVal =(byte) intVal;
+//do Something with byteVal;
+}
+
+Reading Charecter at a time
+Reader reader ;
+int intVal;
+while(intVal = reader.read()) > = 0)
+{
+char charVal =(char) intVal;
+}
+
+39.tell some of the reader/writer class:
+readerClasses:
+charArrayReader
+StringReader
+pipedReader
+InputStreamReader->FileReader
+
+WriterClass:
+charArraywriter
+StringWriter
+PipedWriter
+OutputStreamWriter
+
+Collection:
+__________________
+38.Tell me about array and its limitations?
+Staiacally sized.
+Require explicit position managment.
+
+39.write a program to create a list which will have names in that and then print all the name which is added.
+
+package javafundamental.collections;
+
+import java.util.ArrayList;
+
+import javafundamental.CargoFlight;
+
+public class ArrayListExample {
+	public static void main(String[] args) {
+		//String args[] = new String[10];//Array declaration
+		ArrayList<String> name=new ArrayList();//Creating arraylist  
+		ArrayList<String> name2=new ArrayList();//Creating arraylist  
+		name.add("Ravi");//Adding object in arraylist  
+		name.add("Aparna");
+		for(Object o : name)
+		{
+			System.out.println(name);
+		}
+		CargoFlight cr = new CargoFlight();
+		name.add(cr.getClass().toString());//As Array List was of type String that is why had to do toString
+		name2.addAll(name);
+		System.out.println(name);
+		
+	}
+}
+
+39.How to decide on collection:
+Ans:
+
+															Elements are keyed
+															
 
 
 
